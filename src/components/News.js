@@ -281,8 +281,8 @@ export class News extends Component {
     }
 
     fetchMoreData = async () => {
+        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page+1}&pagesize=${this.props.pageSize}`;
         this.setState({ page: this.state.page + 1 })
-        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pagesize=${this.props.pageSize}`;
         // this.setState({ loading: true });
         let data = await fetch(url); //using fetch api
         let parsedData = await data.json()
@@ -311,7 +311,8 @@ export class News extends Component {
                             {/* {!this.state.loading && this.state.articles.map((element) => { uncomment this and comment next line to use*/}
                             {this.state.articles.map((element) => {
                                 return <div className="col-md-4" key={element.url}>
-                                    <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.description ? element.description.slice(0, 88) : ""} imageURL={element.urlToImage} newsURL={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
+                                    <NewsItem title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageURL={element.urlToImage} newsURL={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
+                                    {/* <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.description ? element.description.slice(0, 88) : ""} imageURL={element.urlToImage} newsURL={element.url} author={element.author} date={element.publishedAt} source={element.source.name} /> */}
                                 </div>
                             })}
                         </div>
